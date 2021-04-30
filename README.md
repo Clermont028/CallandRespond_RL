@@ -3,7 +3,7 @@ Bernadette Clermont and Alyssa Pham
 # Description
 CallandRespond_RL is a music-based learning program that attempts to mimic the call-and-response technique.
 - In music, one player offers a phrase that the second player then builds off of and provides unique commentary to. The primary objective is for both musicians to work together to help move the song along in a way that is both creative and cohesive.
-## How to Use
+# How to Use
 **Important**
 - Prior to running the code, it is best to ensure you have the proper configurations set up. 
 - In our program, we've utilized the Python-based toolkit **Music21** from MIT to help generate and compose our musical examples. 
