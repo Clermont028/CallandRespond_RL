@@ -19,19 +19,19 @@ class callAndResponse():
         possible_notes = ['f4', 'g4', 'a', 'b', 'c', 'd', 'e', 'f', 'g5', 'a5', 'b5']
 
         if 'a':
-            return np.random.choice(possible_notes, 1, p=[0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075, 0.075])
         if 'b':
-            return np.random.choice(possible_notes, 1, p=[0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075])
         if 'c':
-            return np.random.choice(possible_notes, 1, p=[0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075])
         if 'd':
-            return np.random.choice(possible_notes, 1, p=[0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075])
         if 'e':
-            return np.random.choice(possible_notes, 1, p=[0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075])
         if 'f':
-            return np.random.choice(possible_notes, 1, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075])
+            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075])
         if 'g':
-            return np.random.choice(possible_notes, 1, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11])
+            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11])
 
         
     def choose_rhythm(self):
@@ -40,9 +40,9 @@ class callAndResponse():
     def change(self, note):
        
        
-        note = self.stochastic_note(note)
-        rhythm = self.choose_rhythm()
-        new_note = note + rhythm
+        note = str(self.stochastic_note(note))
+        rhythm = str(self.choose_rhythm())
+        new_note = str(note + rhythm)
 
         return new_note
 
@@ -83,22 +83,22 @@ class callAndResponse():
         return self.response
 
 def main():
-    call_str = input("Enter a measure: ")
-    call_str.strip()
-    call = call_str.split(" ")
-    print(call)
+    # call_str = input("Enter a measure: ")
+    # call_str.strip()
+    # call = call_str.split(" ")
+    # print(call)
 
-    response = callAndResponse(call)
-    res = response.getResponse()
+    # response = callAndResponse(call)
+    # res = response.getResponse()
 
-    print(res)
-    new_string = "tinynotation: 3/4"
+    # print(res)
+    # new_string = "tinynotation: 3/4"
 
     # for note in res:
     #     new_string = new_string + " " + note
 
-    # melody = converter.parse(new_string)
-    # melody.show()
+    melody = converter.parse('B58')
+    melody.show()
 
 
 
