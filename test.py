@@ -8,9 +8,12 @@ class callAndResponse():
         self.measure = self.call[0]
         self.call.pop(0)
 
+
         self.initScore = self.calculate_score(self.call)
+        self.response = self.algorithm(self.call)
+
         # print(self.initScore)
-        self.algorithm(self.call)
+      
 
     def stochastic_note(self, note):
         possible_notes = ['f4', 'g4', 'a', 'b', 'c', 'd', 'e', 'f', 'g5', 'a5', 'b5']
@@ -36,8 +39,9 @@ class callAndResponse():
 
     def change(self, note):
        
-        note = stochastic_note(note)
-        rhythm = choose_rhythm()
+       
+        note = self.stochastic_note(note)
+        rhythm = self.choose_rhythm()
         new_note = note + rhythm
 
         return new_note
@@ -46,32 +50,37 @@ class callAndResponse():
         improved_score = self.initScore
         call = self.call
         response = []
+        final = []
 
-        while improved_score > 1:
+        while improved_score < 0:
             for note in call:
-                new_note = change(note)
-                response
+                new_note = self.change(note)
+                response.append(new_note)
 
-            response_score = calculate_score(response)
+            response_score = self.calculate_score(response)
             improved_score = response_score - improved_score
             call = response
+            final = response
             response = []
-
-        return response
-
+      
+        self.response = final
+        return self.response
                 
     def calculate_score(self, measure):
         score = 0
         for i in range(len(measure) - 1):
-            neighbor = ord(measure[i+1])   
+            neighbor = ord(measure[i+1][0])   
             compare = ord(measure[i][0])
-            print(compare - neighbor)
+            # print(compare - neighbor)
             if abs(compare - neighbor) > 2:
                score -= 1
         return score
 
-    def getScore():
+    def getScore(self):
         return self.initScore
+
+    def getResponse(self):
+        return self.response
 
 def main():
     call_str = input("Enter a measure: ")
@@ -80,13 +89,17 @@ def main():
     print(call)
 
     response = callAndResponse(call)
+    res = response.getResponse()
+
+    print(res)
     new_string = "tinynotation: 3/4"
 
-    for note in response:
-        new_string = new_string + " " + note
+    # for note in res:
+    #     new_string = new_string + " " + note
 
-    melody = converter.parse(new_string)
-    melody.show()
+    # melody = converter.parse(new_string)
+    # melody.show()
+
 
 
 if __name__ == "__main__" :
