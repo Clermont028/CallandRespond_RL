@@ -83,21 +83,21 @@ class callAndResponse():
         return self.response
 
 def main():
-    # call_str = input("Enter a measure: ")
-    # call_str.strip()
-    # call = call_str.split(" ")
-    # print(call)
+    call_str = input("Enter a measure: ")
+    call_str.strip()
+    call = call_str.split(" ")
+    print(call)
 
-    # response = callAndResponse(call)
-    # res = response.getResponse()
+    response = callAndResponse(call)
+    res = response.getResponse()
 
-    # print(res)
-    # new_string = "tinynotation: 3/4"
+    print(res)
+    new_string = "tinynotation: 3/4"
 
-    # for note in res:
-    #     new_string = new_string + " " + note
+    for note in res:
+        new_string = new_string + " " + note
 
-    melody = converter.parse('B58')
+    melody = converter.parse(new_string)
     melody.show()
 
 
