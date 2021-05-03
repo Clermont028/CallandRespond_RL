@@ -18,6 +18,8 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - **Rhythm limitation**
   - User may choose from a set of 3 possible rhythms (barring rests): quarter, eighth, 16th
   - Code representation: 4, 8, 16 (follows after chooosing the note)
+  ![image](https://user-images.githubusercontent.com/48339547/116947073-6eff2a00-ac41-11eb-8339-b092f7b8f658.png)
+
 - **No sharp/flat indicators**
 - **Assumption that user will always be working in a 4/4 time signature**
 
