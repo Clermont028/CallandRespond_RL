@@ -11,9 +11,10 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - This toolkit is compatible with music notation software such as [LilyPond](http://lilypond.org/), [Finale](https://www.finalemusic.com/), and [MuseScore](https://musescore.org/en). To be able to display the results of our program, we recommend you download one of these three options (we've personally used MuseScore).
 **User Input**
 - Though Music21 is quite robust, for the sake of this project, we have taken the liberty of imposing limitations on what is considered 'valid' input by the user. This is just to ensure we are not working with an overly large and complex state-action space.
-- 1) One octave limitation
-  - User may choose from a set of 8 possible notes (as shown in the image below) that is represented in code like this: g, a, b, c', d', e', f', g'
-  - ![image](https://user-images.githubusercontent.com/48339547/116928339-8c70cb80-ac22-11eb-84d3-4e569ff2641c.png)
+- **One octave limitation**
+  - User may choose from a set of 8 possible notes (as shown in the image below)
+  - Code representation: g, a, b, c', d', e', f', g'  
+  ![image](https://user-images.githubusercontent.com/48339547/116928339-8c70cb80-ac22-11eb-84d3-4e569ff2641c.png)
 
 
 ## Breakdown of Algorithm 
