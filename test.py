@@ -7,7 +7,7 @@ class callAndResponse():
         self.call = initCall
         self.measure = self.call[0]
         self.call.pop(0)
-
+        self.EPISODES = 1000
 
         self.initScore = self.calculate_score(self.call)
         self.response = self.algorithm(self.call)
@@ -16,30 +16,29 @@ class callAndResponse():
       
 
     def stochastic_note(self, note):
-        possible_notes = ['f4', 'g4', 'a', 'b', 'c', 'd', 'e', 'f', 'g5', 'a5', 'b5']
+        possible_notes = ["f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
 
-        if 'a':
+        if "a":
             return np.random.choice(possible_notes, p=[0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075, 0.075])
-        if 'b':
+        if "b":
             return np.random.choice(possible_notes, p=[0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075])
-        if 'c':
+        if "c'":
             return np.random.choice(possible_notes, p=[0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075])
-        if 'd':
+        if "d'":
             return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075])
-        if 'e':
+        if "e'":
             return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075])
-        if 'f':
+        if "f'":
             return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075])
-        if 'g':
+        if "g'":
             return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11])
+    
 
-        
     def choose_rhythm(self):
         return np.random.choice(['4', '8', '16'])
 
     def change(self, note):
-       
-       
+         
         note = str(self.stochastic_note(note))
         rhythm = str(self.choose_rhythm())
         new_note = str(note + rhythm)
@@ -51,9 +50,9 @@ class callAndResponse():
         call = self.call
         response = []
         final = []
-
-        while improved_score < 0:
-            for note in call:
+        
+        for episode in range(self.EPISODES):
+            while duration_left > 0: #fit the measure
                 new_note = self.change(note)
                 response.append(new_note)
 
@@ -65,7 +64,7 @@ class callAndResponse():
       
         self.response = final
         return self.response
-                
+    
     def calculate_score(self, measure):
         score = 0
         for i in range(len(measure) - 1):
@@ -85,14 +84,18 @@ class callAndResponse():
 def main():
     call_str = input("Enter a measure: ")
     call_str.strip()
-    call = call_str.split(" ")
+    call = call_str.split()
     print(call)
+
 
     response = callAndResponse(call)
     res = response.getResponse()
 
     print(res)
     new_string = "tinynotation: 3/4"
+
+    for note in call:
+        new_string = new_string + " " + note
 
     for note in res:
         new_string = new_string + " " + note
