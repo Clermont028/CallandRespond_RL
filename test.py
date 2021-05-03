@@ -16,22 +16,24 @@ class callAndResponse():
       
 
     def stochastic_note(self, note):
-        possible_notes = ["f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
+        possible_notes = ["e", "f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'"]
 
+        if "g":
+             return np.random.choice(possible_notes, p=[0.13, 0.13, 0.13, 0.13, 0.13, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05])
         if "a":
-            return np.random.choice(possible_notes, p=[0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[ 0.05, 0.13, 0.13, 0.13, 0.13, 0.13, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05])
         if "b":
-            return np.random.choice(possible_notes, p=[0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.05, 0.05, 0.13, 0.13, 0.13, 0.13, 0.13, 0.05, 0.05, 0.05, 0.05, 0.05])
         if "c'":
-            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.05, 0.05, 0.05, 0.13, 0.13, 0.13, 0.13, 0.13, 0.05, 0.05, 0.05, 0.05])
         if "d'":
-            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.05, 0.05, 0.05, 0.05, 0.13, 0.13, 0.13, 0.13, 0.13, 0.05, 0.05, 0.05])
         if "e'":
-            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075, 0.075])
+            return np.random.choice(possible_notes, p=[0.05, 0.05, 0.05, 0.05, 0.05, 0.13, 0.13, 0.13, 0.13, 0.13, 0.05, 0.05])
         if "f'":
-            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11, 0.075])
+            return np.random.choice(possible_notes, p=[0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.13, 0.13, 0.13, 0.13, 0.13, 0.05])
         if "g'":
-            return np.random.choice(possible_notes, p=[0.075, 0.075, 0.075, 0.075, 0.075, 0.075, 0.11, 0.11, 0.11, 0.11, 0.11])
+            return np.random.choice(possible_notes, p=[0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.13, 0.13, 0.13, 0.13, 0.13])
     
 
     def choose_rhythm(self):
