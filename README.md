@@ -9,7 +9,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - In our program, we've utilized the Python-based toolkit **Music21** from MIT to help generate and compose our musical examples. 
   - [More information can be found through their documentation website.](http://web.mit.edu/music21/doc/index.html)
 - This toolkit is compatible with music notation software such as [LilyPond](http://lilypond.org/), [Finale](https://www.finalemusic.com/), and [MuseScore](https://musescore.org/en). To be able to display the results of our program, we recommend you download one of these three options (we've personally used MuseScore).
-- **User Input**
+### User Input
 - Though Music21 is quite robust, for the sake of this project, we have taken the liberty of imposing limitations on what is considered 'valid' input by the user. This is just to ensure we are not working with an overly large and complex state-action space.
 - **8-note limitation**
   - User may choose from a set of 8 possible notes (as shown in the image below)
