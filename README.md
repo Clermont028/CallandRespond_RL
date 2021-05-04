@@ -30,7 +30,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
   - States: Note position within a measure
   - Actions:**UP** (move note one note up), **DOWN** (move note one note down), **FASTER** (select faster rhythm, ex.changing an 8th to a 16th), **SLOWER** (select slower rhythm, ex. changing an 8th to a quarter), **NONE**
   
-| First Header  | Second Header |
+- | First Header  | Second Header |
 | ------------- | ------------- |
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
