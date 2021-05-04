@@ -30,6 +30,8 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
   - States: Note position within a measure
 - First Header | Second Header
 ------------ | -------------
+Content from cell 1 | Content from cell 2
+Content in the first column | Content in the second column
 - What is your algorithm learning?
 - Do you have a success metric? (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
 
