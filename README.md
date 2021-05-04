@@ -55,14 +55,26 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
    -  alpha: we used a standard alpha of 0.1 as we had no preference regarding its learning rate 
    -  gamma: [debating]
    -  epsilon: we increased the epsilon to 0.5 so that it have a higher chance to explore other options (and thus align itself more with the creative process)
- - Support your results through graphs, if applicable. How did you decide that the algorithm converged?
- - A few screenshots of your problem/game to describe how your agent works
+ - **Support your results through graphs, if applicable. How did you decide that the algorithm converged?**
+   - Given there's no "right" answer, there's no optimal policy to be expected. Even if given the same input by the user, the program will always output something unique in return. Therefore, there is no convergence that can occur. Instead, we judge the score of the final result is greater than the original input. 
+ - **A few screenshots of your problem/game to describe how your agent works**
+  
 # Conclusion
 - **A brief summary of your results**
-  - music,,, good
-- What did you learn from this project?
-- What was the most challenging part?
-- What would you add/research if you had the opportunity to continue this work?
+  - Overall, we were surprised by how well the program performed in the end. Given our lack of musical background, it was interesting to see the program output a result that was sounded sufficiently pleasing to the human ear.
+- **What did you learn from this project?**
+  - From this project, we learned that creativity is quite a difficult and ambitious endeavor to emulate through a computer program. Especially now, after completing the program, we realize there is still so much more that could be added to fully encapsulate a more holistic musical response. 
+  - During our main testing stage, we also did experience many instances in which our program learned to high-jack and game the reward system, so that was fun.
+  - We also learned a lot during our time figuring out which parameters we needed to adjust to generate more appropriate responses. 
+- **What was the most challenging part?**
+  - It took us 3 hours to download and and figure out how to get Music21 to work on vscode :)
+  - Developing the algorithm: we went through many iterations trying to figure out what the states should be, how to reward/score the measures
+- **What would you add/research if you had the opportunity to continue this work?**
+  - Less user-input restrictions :)
+  - More sophisticated scoring of measures
+  - Research of and utilization of tendency tones to help ensure that measures ended on notes that feel more "conclusive"
+  - Have the program be able to continuously build off responses to produce a whole song/piece
+  - More research on what exactly makes music sound "good" from a mathematical standpoint
 
 # References
 
