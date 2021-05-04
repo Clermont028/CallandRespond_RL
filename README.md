@@ -13,15 +13,15 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - Though Music21 is quite robust, for the sake of this project, we have taken the liberty of imposing limitations on what is considered 'valid' input by the user. This is just to ensure we are not working with an overly large and complex state-action space.
 - **8-note limitation**
   - User may choose from a set of 8 possible notes (as shown in the image below)
-  - Code representation: g, a, b, c', d', e', f', g'  (Note: an apostrophe following a letter indicates the note occupies a different octave) 
+  - Code representation: g, a, b, c', d', e', f', g'  (Note: an apostrophe following a letter indicates that the note occupies a different octave) 
   ![image](https://user-images.githubusercontent.com/48339547/116928339-8c70cb80-ac22-11eb-84d3-4e569ff2641c.png)
 - **Rhythm limitation**
-  - User may choose from a set of 3 possible rhythms (barring rests): quarter, eighth, 16th
+  - User may choose from a set of 3 possible rhythms (rests not included): quarter, eighth, 16th
   - Code representation: 4, 8, 16 (follows after chooosing the note)
   ![image](https://user-images.githubusercontent.com/48339547/116947073-6eff2a00-ac41-11eb-8339-b092f7b8f658.png)
 
-- **No sharp/flat indicators**
-- **Assumption that user will always be working in a 4/4 time signature**
+- **No sharp/flat/etc. indicators**
+- **Assumption that the user will always be working in a 4/4 time signature**
 
 ## Breakdown of Algorithm 
 - Describe the problem, states, actions, rewards
