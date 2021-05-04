@@ -177,19 +177,19 @@ def main():
     call = call_str.split()
     print(call)
 
-
-    response = callAndResponse(call)
-    res = list (response.getResponse())
-    print(res)
-
     new_string = "tinynotation: 4/4"
 
     for note in call:
         new_string = new_string + " " + note
 
-    for note in res:
-        new_string = new_string + " " + note
+    response = callAndResponse(call)
+    res = list (response.getResponse())
+    print(res)
 
+    for note2 in res:
+        new_string = new_string + " " + note2
+
+    print(new_string)
     melody = converter.parse(new_string)
     melody.show()
 
