@@ -28,8 +28,9 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - Describe the problem, states, actions, rewards
 - Problem: When given a user-generated **call**, can a program output an adequate **response** that both reflects and creatively builds off the original?
   - States: Note position within a measure
- 
-| Actions | Description |
+  - Rewards: If a changed measure (response) has a score greater than a previously inputted measure (call) then it earns a reward of 1, otherwise -1.
+  
+  | Actions | Description |
 | ------------- | ------------- |
 | **UP**  | move current note one note up  |
 | **DOWN** | move current note one note down  |
@@ -37,7 +38,6 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 | **SLOWER** | select a "slower" rhythm, (ex. changing an 8th note to a quarter)  |
 | **NONE** | no changes made |
 
-   - Rewards: If a changed measure (response) has a score greater than a previously inputted measure (call) then it earns a reward of 1, otherwise -1.
 - What is your algorithm learning?
 - Do you have a success metric? (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
 
