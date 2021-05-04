@@ -30,7 +30,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
   - States: Note position within a measure
   - Rewards: If a changed measure (response) has a score greater than a previously inputted measure (call) then it earns a reward of 1, otherwise -1.
   
-  | Actions | Description |
+| Actions | Description |
 | ------------- | ------------- |
 | **UP**  | move current note one note up  |
 | **DOWN** | move current note one note down  |
