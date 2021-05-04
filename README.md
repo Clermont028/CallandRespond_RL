@@ -79,6 +79,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
   - Research of and utilization of tendency tones to help ensure that measures ended on notes that feel more "conclusive"
   - Have the program be able to continuously build off responses to produce a whole song/piece
   - More research on what exactly makes music sound "good" from a mathematical standpoint
+  - A very lofty goal, but our original idea was to first implement call-and-response in relation to music and then eventually translate that to how call-and-response works in everyday huamn speech.
 
 # References
 
