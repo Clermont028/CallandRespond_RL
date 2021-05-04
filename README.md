@@ -58,7 +58,8 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
  - Support your results through graphs, if applicable. How did you decide that the algorithm converged?
  - A few screenshots of your problem/game to describe how your agent works
 # Conclusion
-- A brief summary of your results
+- **A brief summary of your results**
+  - music,,, good
 - What did you learn from this project?
 - What was the most challenging part?
 - What would you add/research if you had the opportunity to continue this work?
