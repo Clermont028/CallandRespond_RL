@@ -25,10 +25,9 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 
 ## Breakdown of Algorithm 
 ### Part 1
-- Describe the problem, states, actions, rewards
-- Problem: When given a user-generated **call**, can a program output an adequate **response** that both reflects and creatively builds off the original?
-  - States: Note position within a measure
-  - Rewards: If a changed measure (response) has a score greater than a previously inputted measure (call) then it earns a reward of 1, otherwise -1.
+- **Problem:** When given a user-generated **call**, can a program output an adequate **response** that both reflects and creatively builds off the original?
+- **States:** Note position within a measure
+- **Rewards:** If a changed measure (response) has a score greater than a previously inputted measure (call) then it earns a reward of 1, otherwise -1.
   
 | Actions | Description |
 | ------------- | ------------- |
