@@ -4,39 +4,62 @@ Team Members: Bernadette Clermont and Alyssa Pham
 CallandRespond_RL is a music-based learning program that attempts to mimic the call-and-response technique.
 - In music, one player offers a phrase that the second player then builds off of and provides unique commentary to. The primary objective is for both musicians to work together to help move the song along in a way that is both creative and cohesive.
 ## How to Use
-**Important**
+### Important
 - Prior to running the code, it is best to ensure you have the proper configurations set up. 
 - In our program, we've utilized the Python-based toolkit **Music21** from MIT to help generate and compose our musical examples. 
   - [More information can be found through their documentation website.](http://web.mit.edu/music21/doc/index.html)
 - This toolkit is compatible with music notation software such as [LilyPond](http://lilypond.org/), [Finale](https://www.finalemusic.com/), and [MuseScore](https://musescore.org/en). To be able to display the results of our program, we recommend you download one of these three options (we've personally used MuseScore).
-**User Input**
+### User Input
 - Though Music21 is quite robust, for the sake of this project, we have taken the liberty of imposing limitations on what is considered 'valid' input by the user. This is just to ensure we are not working with an overly large and complex state-action space.
 - **8-note limitation**
   - User may choose from a set of 8 possible notes (as shown in the image below)
-  - Code representation: g, a, b, c', d', e', f', g'  (Note: an apostrophe following a letter indicates the note occupies a different octave) 
+  - Code representation: g, a, b, c', d', e', f', g'  (Note: an apostrophe following a letter indicates that the note occupies a different octave) 
   ![image](https://user-images.githubusercontent.com/48339547/116928339-8c70cb80-ac22-11eb-84d3-4e569ff2641c.png)
 - **Rhythm limitation**
-  - User may choose from a set of 3 possible rhythms (barring rests): quarter, eighth, 16th
+  - User may choose from a set of 3 possible rhythms (rests not included): quarter, eighth, 16th
   - Code representation: 4, 8, 16 (follows after chooosing the note)
   ![image](https://user-images.githubusercontent.com/48339547/116947073-6eff2a00-ac41-11eb-8339-b092f7b8f658.png)
 
-- **No sharp/flat indicators**
-- **Assumption that user will always be working in a 4/4 time signature**
+- **No sharp/flat/etc. indicators**
+- **Assumption that the user will always be working in a 4/4 time signature**
 
 ## Breakdown of Algorithm 
-- Describe the problem, states, actions, rewards
-- What is your algorithm learning?
-- Do you have a success metric? (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
+### Part 1
+- **Problem:** When given a user-generated **call**, can a program output an adequate **response** that both reflects and creatively builds off the original?
+- **States:** Note position within a measure
+- **Rewards:** If a changed measure (response) has a score greater than a previously inputted measure (call) then it earns a reward of 1, otherwise -1.
+  
+| Actions | Description |
+| ------------- | ------------- |
+| **UP**  | move current note one note up  |
+| **DOWN** | move current note one note down  |
+| **FASTER** | select a "faster" rhythm (ex. changing an 8th note to a 16th)  |
+| **SLOWER** | select a "slower" rhythm, (ex. changing an 8th note to a quarter)  |
+| **NONE** | no changes made |
 
-- The learning algorithm(s) you used in solving the problem.
-- Why do you think this was an appropriate choice?
+### Part 2
+- **What is your algorithm learning?**
+  - Our algorithm is learning what actions are the best to take to "improve" and build off a given call.
+- **Do you have a success metric?** (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
+  - There is no success metric. Creativity is purely subjective, therefore it was up to us, personally, to determine whether or not a result qualified as "good" or not.
+  - In tandem with this notion, we've made it so that no call will yield a single "best" result. Each time the program is run with the same inputted call, a unique response will always be returned.
 
-- Results
-  - Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?
-  - Support your results through graphs, if applicable. How did you decide that the algorithm converged?
-  - A few screenshots of your problem/game to describe how your agent works
+### Part 3
+- **The learning algorithm(s) you used in solving the problem.**
+  - SARSA
+- **Why do you think this was an appropriate choice?**
+  - [shrugs]
+
+### Results
+ - **Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?**
+   -  alpha: we used a standard alpha of 0.1 as we had no preference regarding its learning rate 
+   -  gamma: [debating]
+   -  epsilon: we increased the epsilon to 0.5 so that it have a higher chance to explore other options (and thus align itself more with the creative process)
+ - Support your results through graphs, if applicable. How did you decide that the algorithm converged?
+ - A few screenshots of your problem/game to describe how your agent works
 # Conclusion
-- A brief summary of your results
+- **A brief summary of your results**
+  - music,,, good
 - What did you learn from this project?
 - What was the most challenging part?
 - What would you add/research if you had the opportunity to continue this work?
