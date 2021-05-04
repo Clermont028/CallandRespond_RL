@@ -50,10 +50,13 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - **Why do you think this was an appropriate choice?**
   - [shrugs]
 
-- Results
-  - Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?
-  - Support your results through graphs, if applicable. How did you decide that the algorithm converged?
-  - A few screenshots of your problem/game to describe how your agent works
+### Results
+ - **Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?**
+   -  alpha: we used a standard alpha of 0.1 as we had no preference regarding its learning rate 
+   -  gamma: [debating]
+   -  epsilon: we increased the epsilon to 0.5 so that it have a higher chance to explore other options (and thus align itself more with the creative process)
+ - Support your results through graphs, if applicable. How did you decide that the algorithm converged?
+ - A few screenshots of your problem/game to describe how your agent works
 # Conclusion
 - A brief summary of your results
 - What did you learn from this project?
