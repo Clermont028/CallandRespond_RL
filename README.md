@@ -48,7 +48,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - **The learning algorithm(s) you used in solving the problem.**
   - SARSA
 - **Why do you think this was an appropriate choice?**
-  - [shrugs]
+  - For our project, we needed an algorithm that would be able to learn while it explored the model-free environment. It was also important to use an algorithm that considered state-action pairs rather than only state-values because our program is more reliant on making adjustments that gradually improve the overall music rather than making the best decision, so state-values alone wouldn't help us determine what would be a better improvement to make.
 
 ### Results
  - **Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?**
