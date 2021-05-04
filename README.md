@@ -37,8 +37,12 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 | **SLOWER** | select a "slower" rhythm, (ex. changing an 8th note to a quarter)  |
 | **NONE** | no changes made |
 
-- What is your algorithm learning?
-- Do you have a success metric? (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
+### Part 2
+- **What is your algorithm learning?**
+  - Our algorithm is learning what actions are the best to take to "improve" and build off a given call.
+- **Do you have a success metric?** (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
+  - There is no success metric. Creativity is purely subjective, therefore it was up to us, personally, to determine whether or not a result qualified as "good" or not.
+  - In tandem with this notion, we've made it so that no call will yield a single "best" result. Each time the program is run with the same inputted call, a unique response will always be returned.
 
 - The learning algorithm(s) you used in solving the problem.
 - Why do you think this was an appropriate choice?
