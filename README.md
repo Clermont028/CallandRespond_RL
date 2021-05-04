@@ -28,11 +28,8 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 - Describe the problem, states, actions, rewards
 - Problem: When given a user-generated **call**, can a program output an adequate **response** that both reflects and creatively builds off the original?
   - States: Note position within a measure
-  - Actions:
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
+  - Actions:**UP** (move note one note up), **DOWN** (move note one note down), **FASTER** (select faster rhythm, ex.changing an 8th to a 16th), **SLOWER** (select slower rhythm, ex. changing an 8th to a quarter), **NONE**
+  - Rewards:
 
 - What is your algorithm learning?
 - Do you have a success metric? (e.g. wins a game 80% of the time, achieves a score of 500, etc.)
