@@ -44,8 +44,11 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
   - There is no success metric. Creativity is purely subjective, therefore it was up to us, personally, to determine whether or not a result qualified as "good" or not.
   - In tandem with this notion, we've made it so that no call will yield a single "best" result. Each time the program is run with the same inputted call, a unique response will always be returned.
 
-- The learning algorithm(s) you used in solving the problem.
-- Why do you think this was an appropriate choice?
+### Part 3
+- **The learning algorithm(s) you used in solving the problem.**
+  - SARSA
+- **Why do you think this was an appropriate choice?**
+  - [shrugs]
 
 - Results
   - Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?
