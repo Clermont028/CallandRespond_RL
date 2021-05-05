@@ -30,7 +30,7 @@ class callAndResponse():
         self.MAXDURATION = self.get_total_duration(self.call)
 
         self.ALPHA = 0.1
-        self.GAMMA = 0.3
+        self.GAMMA = 0.4
         self.EPSILON = 0.3
 
         self.initScore = self.calculate_score(self.call, self.MAXDURATION)
@@ -149,7 +149,7 @@ class callAndResponse():
 
 
     def is_terminal(self, state, duration):
-       return duration >= self.MAXDURATION or state == 15
+       return duration >= 2 or state == 15
 
 
     def sarsa(self):
@@ -166,18 +166,7 @@ class callAndResponse():
            
             while self.is_terminal(state, duration) == False: 
 
-                alt_action, alt_action_val = self.choose_action(prevResponse, state)
-                alt_note = self.update_note(alt_action, state, prevResponse)
-                alt_measure = self.change_measure(alt_note, prevResponse, state)
-                alt_action_val =  self.calculate_score(prevResponse, duration) - self.calculate_score(alt_measure, duration) 
-
-                if alt_action_val > action_val:
-                    best_action = alt_action
-                else:
-                    best_action = action
-
-
-                newNote = self.update_note(best_action, state, currResponse) 
+                newNote = self.update_note(action, state, currResponse) 
                 note, rhythm = self.get_note_parts(newNote)
                 currResponse = self.change_measure(newNote, currResponse, state)
 
@@ -186,12 +175,16 @@ class callAndResponse():
                 state_prime = state + 1
                 action_prime, action_prime_val = self.choose_action(prevResponse, state_prime)
                 
-                if self.calculate_score(currResponse, duration) > self.calculate_score(prevResponse, duration):
-                    reward = 1
+                currScore = self.calculate_score(currResponse, duration)
+                prevScore = self.calculate_score(prevResponse, duration)
+                difference = abs(currScore - prevScore)
+
+                if currScore > prevScore:
+                    reward = difference
                 else:
-                    reward = -1
-                
-                best_index = self.ALL_POSSIBLE_ACTIONS.index(best_action)
+                    reward = 0
+
+                best_index = self.ALL_POSSIBLE_ACTIONS.index(action)
                 index_prime = self.ALL_POSSIBLE_ACTIONS.index(action_prime)
                 update = self.Q[state][best_index] + self.ALPHA * (reward +  self.GAMMA * self.Q[state_prime][index_prime] - self.Q[state][best_index])
                 self.Q[state][best_index] = update
@@ -207,24 +200,42 @@ class callAndResponse():
         score = 0
 
         for i in range(len(measure) - 1):
+            if i == 0:
+                before, r_before = self.get_note_parts(measure[i])
+            else:
+                before, r_before = self.get_note_parts(measure[i - 1])
+
             note, rhythm = self.get_note_parts(measure[i])
-            note2, rhythm2 = self.get_note_parts(measure[i+1])
+            after, r_after = self.get_note_parts(measure[i+1])
 
             # penalizes notes with large intervals between its neighbors
-            if note2 not in self.GOOD_NEIGHBORS[note]:
-               score -= 1
+            if after not in self.GOOD_NEIGHBORS[note] or before not in self.GOOD_NEIGHBORS[note]:
+               score -= 2
 
             # rewards 8th and 16th notes that come in pairs
             # ex. it would be 'awkward' to have a quarter note jump to a lone 16th note
-            if rhythm == '8' and rhythm2 == '8':
+            if rhythm == '4' and r_after == '4':
                 score += 1
-            if rhythm == '16' and rhythm2 == '16':
-                score += 1
-            if rhythm == '16' and rhythm2 == '8':
+            if rhythm == '8' and r_after == '8':
+                score += 2
+            if rhythm == '16' and r_after == '16':
+                score += 2
+            if rhythm == '16' and r_after == '8':
+                score -= 1
+            if rhythm == '8' and r_after == '16':
+                score -= 1
+            if rhythm == '4' and r_after == '16':
+                score -= 2
+            if rhythm == '16' and r_after == '4':
                 score -= 2
 
-            if self.RHYTHM_VALUES[rhythm] + duration > self.MAXDURATION:
-                score -= 1
+            # if self.RHYTHM_VALUES[rhythm] + duration > self.MAXDURATION:
+            #     score -= 2
+
+            # makes the ending feel more conclusive rather than abruptly stop
+            if i == (len(measure) - 1) and rhythm == '4':
+                score += 3
+
         return score
 
 
