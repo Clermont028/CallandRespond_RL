@@ -58,6 +58,9 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
  - **Support your results through graphs, if applicable. How did you decide that the algorithm converged?**
    - Given there's no "right" answer, there's no optimal policy to be expected. Even if given the same input by the user, the program will always output something unique in return. Therefore, there is no convergence that can occur. Instead, we judge the score of the final result is greater than the original input. 
  - **A few screenshots of your problem/game to describe how your agent works**
+ - First iteration (call is shown in the first measure):
+ ![image](https://user-images.githubusercontent.com/48339547/117182367-dd57ff80-ad9b-11eb-9489-d3c8d0a28af3.png)
+
    
 # Conclusion
 - **A brief summary of your results**
