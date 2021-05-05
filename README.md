@@ -53,7 +53,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 ### Results
  - **Explaing the values of the applicable hyperparameters (alpha, gamma, epsilon) you used. How did you decide what values to use?**
    -  alpha: we used a standard alpha of 0.1 as we had no preference regarding its learning rate 
-   -  gamma: [debating]
+   -  gamma: we decided on a gamma of 0.7 to strike a balance between valuing a particular action in a given state and exploring new actions after a certain point 
    -  epsilon: we increased the epsilon to 0.5 so that it have a higher chance to explore other options (and thus align itself more with the creative process)
  - **Support your results through graphs, if applicable. How did you decide that the algorithm converged?**
    - Given there's no "right" answer, there's no optimal policy to be expected. Even if given the same input by the user, the program will always output something unique in return. Therefore, there is no convergence that can occur. Instead, we judge the score of the final result is greater than the original input. 
