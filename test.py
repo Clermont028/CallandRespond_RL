@@ -19,19 +19,13 @@ class callAndResponse():
 
         self.ALL_POSSIBLE_ACTIONS = ['UP', 'DOWN', 'FASTER', 'SLOWER', 'NONE']
         self.ALL_POSSIBLE_NOTES = ["e", "f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'"] 
-        self.GOOD_NEIGHBORS = { "g": ["e", "f", "g", "a", "b"] , "a": ["g", "f", "a", "b", "c'"],
-                                "b": ["g", "a", "b", "c'", "d'"], "c'": ["a", "b", "c'", "d'", "e'"],
-                                "d'": ["b", "c'", "d'", "e'", "f'"], "e'": ["c'", "d'", "e'", "f'", "g'"],
-                                "f'": ["d'", "e'", "f'", "g'", "a'"], "g'": ["e'", "f'", "g'", "a'", "b'"],
-                                "e": ["f", "g", "e"], "f": ["e", "f" ,"g", "a"], "a'": ["f'", "g'", "a'", "b'"],
-                                "b'": ["g'", "a'", "b'"]}
         self.ALL_POSSIBLE_RHYTHMS = ['4', '8', '16']
         self.RHYTHM_VALUES = {'4': 0.25, '8': 0.125, '16': 0.0625} #used to calculate measure duration
         self.MAXDURATION = self.get_total_duration(self.call)
 
         self.ALPHA = 0.1
-        self.GAMMA = 0.4
-        self.EPSILON = 0.3
+        self.GAMMA = 0.1
+        self.EPSILON = 0.5
 
         self.initScore = self.calculate_score(self.call, self.MAXDURATION)
 
@@ -45,7 +39,6 @@ class callAndResponse():
         self.response = self.sarsa()
 
 
-
     def get_note_parts(self, note):
 
         if "'" in note: 
@@ -57,6 +50,7 @@ class callAndResponse():
         
         return (letter, rhythm)
 
+
     def get_total_duration(self, measure):
         total_duration = 0
 
@@ -66,32 +60,53 @@ class callAndResponse():
         
         return total_duration
 
+
     def stochastic_note(self, note):  
 
-        if "g":
+        if note == "g":
              return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.14, 0.14, 0.09, 0.14, 0.14, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05])
-        if "a":
+        if note == "a":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.14, 0.14, 0.09, 0.14, 0.14, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05])
-        if "b":
+        if note == "b":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.05, 0.14, 0.14, 0.09, 0.14, 0.14, 0.05, 0.05, 0.05, 0.05, 0.05])
-        if "c'":
+        if note == "c'":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.05, 0.05, 0.14, 0.14, 0.09, 0.14, 0.14, 0.05, 0.05, 0.05, 0.05])
-        if "d'":
+        if note == "d'":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.05, 0.05, 0.05, 0.14, 0.14, 0.09, 0.14, 0.14, 0.05, 0.05, 0.05])
-        if "e'":
+        if note == "e'":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.05, 0.05, 0.05, 0.05, 0.14, 0.14, 0.09, 0.14, 0.14, 0.05, 0.05])
-        if "f'":
+        if note == "f'":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.14, 0.14, 0.09, 0.14, 0.14, 0.05])
-        if "g'":
+        if note == "g'":
             return np.random.choice(self.ALL_POSSIBLE_NOTES, p=[0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.14, 0.14, 0.09, 0.14, 0.14])
 
    
-    def choose_rhythm(self):
-        return np.random.choice(self.ALL_POSSIBLE_RHYTHMS)
+    def stochastic_rhythm(self, rhythm):
+        if rhythm == '4':
+            return np.random.choice(self.ALL_POSSIBLE_RHYTHMS, p=[0.6, 0.3, 0.1])
+        if rhythm == '8':
+            return np.random.choice(self.ALL_POSSIBLE_RHYTHMS, p=[0.2, 0.6, 0.2])   
+        if rhythm == '16':
+            return np.random.choice(self.ALL_POSSIBLE_RHYTHMS, p=[0.1, 0.3, 0.6])
+
+
+    def stochastic_action(self, action):
+        if action == 'UP':
+            return np.random.choice(self.ALL_POSSIBLE_ACTIONS, p=[0.7, 0.15, 0.05, 0.05, 0.05])
+        if action == 'DOWN':
+            return np.random.choice(self.ALL_POSSIBLE_ACTIONS, p=[0.15, 0.7, 0.05, 0.05, 0.05])
+        if action == 'FASTER':
+            return np.random.choice(self.ALL_POSSIBLE_ACTIONS, p=[0.05, 0.05, 0.7, 0.15, 0.05])
+        if action == 'SLOWER':
+            return np.random.choice(self.ALL_POSSIBLE_ACTIONS, p=[0.05, 0.05, 0.15, 0.7, 0.05])
+        if action == 'NONE':
+            return np.random.choice(self.ALL_POSSIBLE_ACTIONS, p=[0.05, 0.05, 0.05, 0.05, 0.8])
 
    
     def update_note(self, action, notePos, measure):
         """Performs a given action and returns the resulting note."""
+
+        actual_action = self.stochastic_action(action)
 
         if notePos not in range(len(measure)):
             measure.append("")
@@ -106,19 +121,19 @@ class callAndResponse():
         newNote = note
         newRhythm = rhythm
 
-        if action == 'UP':
+        if actual_action == 'UP':
             if note_index != len(self.ALL_POSSIBLE_NOTES) - 1:
                 newNote = self.ALL_POSSIBLE_NOTES[note_index + 1]
 
-        if action == 'DOWN':
+        if actual_action == 'DOWN':
             if  note_index != 0 :
                 newNote = self.ALL_POSSIBLE_NOTES[note_index - 1]
 
-        if action == 'FASTER':
+        if actual_action == 'FASTER':
             if rhythm_index != len(self.ALL_POSSIBLE_RHYTHMS) - 1:
                 newRhythm = self.ALL_POSSIBLE_RHYTHMS[rhythm_index + 1]
 
-        if action == 'SLOWER':
+        if actual_action == 'SLOWER':
             if rhythm_index != 0:
                 newRhythm = self.ALL_POSSIBLE_RHYTHMS[rhythm_index-1]
 
@@ -149,7 +164,7 @@ class callAndResponse():
 
 
     def is_terminal(self, state, duration):
-       return duration >= 2 or state == 15
+       return duration >= self.MAXDURATION or state == 15
 
 
     def sarsa(self):
@@ -182,12 +197,12 @@ class callAndResponse():
                 if currScore > prevScore:
                     reward = difference
                 else:
-                    reward = 0
+                    reward = -1
 
-                best_index = self.ALL_POSSIBLE_ACTIONS.index(action)
+                action_index = self.ALL_POSSIBLE_ACTIONS.index(action)
                 index_prime = self.ALL_POSSIBLE_ACTIONS.index(action_prime)
-                update = self.Q[state][best_index] + self.ALPHA * (reward +  self.GAMMA * self.Q[state_prime][index_prime] - self.Q[state][best_index])
-                self.Q[state][best_index] = update
+                update = self.Q[state][action_index] + self.ALPHA * (reward +  self.GAMMA * self.Q[state_prime][index_prime] - self.Q[state][action_index])
+                self.Q[state][action_index] = update
                 
                 state = state_prime
                 action = action_prime
@@ -200,41 +215,24 @@ class callAndResponse():
         score = 0
 
         for i in range(len(measure) - 1):
-            if i == 0:
-                before, r_before = self.get_note_parts(measure[i])
-            else:
-                before, r_before = self.get_note_parts(measure[i - 1])
 
             note, rhythm = self.get_note_parts(measure[i])
             after, r_after = self.get_note_parts(measure[i+1])
 
+            neighbor = ord(measure[i+1][0])   
+            compare = ord(measure[i][0])
+
             # penalizes notes with large intervals between its neighbors
-            if after not in self.GOOD_NEIGHBORS[note] or before not in self.GOOD_NEIGHBORS[note]:
-               score -= 2
+            if abs(compare - neighbor) > 2:
+                score -= 2
 
             # rewards 8th and 16th notes that come in pairs
             # ex. it would be 'awkward' to have a quarter note jump to a lone 16th note
-            if rhythm == '4' and r_after == '4':
-                score += 1
             if rhythm == '8' and r_after == '8':
-                score += 2
+                score += 1
             if rhythm == '16' and r_after == '16':
-                score += 2
-            if rhythm == '16' and r_after == '8':
-                score -= 1
-            if rhythm == '8' and r_after == '16':
-                score -= 1
-            if rhythm == '4' and r_after == '16':
-                score -= 2
-            if rhythm == '16' and r_after == '4':
-                score -= 2
+                score += 1
 
-            # if self.RHYTHM_VALUES[rhythm] + duration > self.MAXDURATION:
-            #     score -= 2
-
-            # makes the ending feel more conclusive rather than abruptly stop
-            if i == (len(measure) - 1) and rhythm == '4':
-                score += 3
 
         return score
 
@@ -252,7 +250,6 @@ def main():
     user_input = input("Enter a measure: ")
     user_input = user_input.strip()
     call = user_input.split()
-    print(call)
 
     final = "tinynotation: 4/4"
 
@@ -261,12 +258,9 @@ def main():
 
     response = callAndResponse(call)
     res = list(response.getResponse())
-    print(res)
 
     for note2 in res:
         final = final + " " + note2
-
-    print(final)
 
     # calls music notation software to display final result
     melody = converter.parse(final)
