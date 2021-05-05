@@ -82,4 +82,4 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
   - A very lofty goal, but our original idea was to first implement call-and-response in relation to music and then eventually translate that to how call-and-response works in everyday huamn speech.
 
 # References
-
+Music21 is Copyright © 2006-2021, Michael Scott Cuthbert and cuthbertLab. Music21 code (excluding content encoded in the corpus) is free and open-source software, licensed under the BSD License.
