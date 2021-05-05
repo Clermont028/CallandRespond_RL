@@ -19,14 +19,21 @@ class callAndResponse():
 
         self.ALL_POSSIBLE_ACTIONS = ['UP', 'DOWN', 'FASTER', 'SLOWER', 'NONE']
         self.ALL_POSSIBLE_NOTES = ["e", "f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'"] 
+        self.GOOD_NEIGHBORS = { "g": ["e", "f", "g", "a", "b"] , "a": ["g", "f", "a", "b", "c'"],
+                                "b": ["g", "a", "b", "c'", "d'"], "c'": ["a", "b", "c'", "d'", "e'"],
+                                "d'": ["b", "c'", "d'", "e'", "f'"], "e'": ["c'", "d'", "e'", "f'", "g'"],
+                                "f'": ["d'", "e'", "f'", "g'", "a'"], "g'": ["e'", "f'", "g'", "a'", "b'"],
+                                "e": ["f", "g", "e"], "f": ["e", "f" ,"g", "a"], "a'": ["f'", "g'", "a'", "b'"],
+                                "b'": ["g'", "a'", "b'"]}
         self.ALL_POSSIBLE_RHYTHMS = ['4', '8', '16']
         self.RHYTHM_VALUES = {'4': 0.25, '8': 0.125, '16': 0.0625} #used to calculate measure duration
+        self.MAXDURATION = self.get_total_duration(self.call)
 
         self.ALPHA = 0.1
-        self.GAMMA = 0.1
-        self.EPSILON = 0.5
+        self.GAMMA = 0.3
+        self.EPSILON = 0.3
 
-        self.initScore = self.calculate_score(self.call)
+        self.initScore = self.calculate_score(self.call, self.MAXDURATION)
 
         # state-action-value dictionary
         # key = note position (index within measure)
@@ -36,6 +43,7 @@ class callAndResponse():
             self.Q[x] = [0.0, 0.0, 0.0, 0.0, 0.0]
     
         self.response = self.sarsa()
+
 
 
     def get_note_parts(self, note):
@@ -49,6 +57,14 @@ class callAndResponse():
         
         return (letter, rhythm)
 
+    def get_total_duration(self, measure):
+        total_duration = 0
+
+        for i in range(len(measure)):
+            note, rhythm = self.get_note_parts(measure[i]) 
+            total_duration += self.RHYTHM_VALUES[rhythm]
+        
+        return total_duration
 
     def stochastic_note(self, note):  
 
@@ -133,7 +149,7 @@ class callAndResponse():
 
 
     def is_terminal(self, state, duration):
-       return duration == 1 or state == 15
+       return duration >= self.MAXDURATION or state == 15
 
 
     def sarsa(self):
@@ -153,7 +169,7 @@ class callAndResponse():
                 alt_action, alt_action_val = self.choose_action(prevResponse, state)
                 alt_note = self.update_note(alt_action, state, prevResponse)
                 alt_measure = self.change_measure(alt_note, prevResponse, state)
-                alt_action_val =  self.calculate_score(prevResponse) - self.calculate_score(alt_measure) 
+                alt_action_val =  self.calculate_score(prevResponse, duration) - self.calculate_score(alt_measure, duration) 
 
                 if alt_action_val > action_val:
                     best_action = alt_action
@@ -170,7 +186,7 @@ class callAndResponse():
                 state_prime = state + 1
                 action_prime, action_prime_val = self.choose_action(prevResponse, state_prime)
                 
-                if self.calculate_score(currResponse) > self.calculate_score(prevResponse):
+                if self.calculate_score(currResponse, duration) > self.calculate_score(prevResponse, duration):
                     reward = 1
                 else:
                     reward = -1
@@ -182,23 +198,21 @@ class callAndResponse():
                 
                 state = state_prime
                 action = action_prime
+            currResponse = currResponse[:state] 
 
         return currResponse
 
 
-    def calculate_score(self, measure): 
+    def calculate_score(self, measure, duration): 
         score = 0
 
         for i in range(len(measure) - 1):
-            neighbor = ord(measure[i+1][0])   
-            compare = ord(measure[i][0])
-            
-            # penalizes notes with large intervals between its neighbors
-            if abs(compare - neighbor) > 2:
-               score -= 1
-
             note, rhythm = self.get_note_parts(measure[i])
             note2, rhythm2 = self.get_note_parts(measure[i+1])
+
+            # penalizes notes with large intervals between its neighbors
+            if note2 not in self.GOOD_NEIGHBORS[note]:
+               score -= 1
 
             # rewards 8th and 16th notes that come in pairs
             # ex. it would be 'awkward' to have a quarter note jump to a lone 16th note
@@ -206,7 +220,11 @@ class callAndResponse():
                 score += 1
             if rhythm == '16' and rhythm2 == '16':
                 score += 1
-    
+            if rhythm == '16' and rhythm2 == '8':
+                score -= 2
+
+            if self.RHYTHM_VALUES[rhythm] + duration > self.MAXDURATION:
+                score -= 1
         return score
 
 
