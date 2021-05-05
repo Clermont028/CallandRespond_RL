@@ -66,6 +66,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
 # Conclusion
 - **A brief summary of your results**
   - Overall, we were surprised by how well the program performed in the end. Given our lack of musical background, it was interesting to see the program output a result that was sounded sufficiently pleasing to the human ear.
+  - At some point we realized that the episode count should be drastically reduced from 1000 to 50. It makes sense since if given such a large number of iterations, the resulting response would undergo a tremendous amount of changes that would make it deviate from the original call completely. The reduction was to ensure it still, relatively, adhered to the call by the end.
 - **What did you learn from this project?**
   - From this project, we learned that creativity is quite a difficult and ambitious endeavor to emulate through a computer program. Especially now, after completing the program, we realize there is still so much more that could be added to fully encapsulate a more holistic musical response. 
   - During our main testing stage, we also did experience many instances in which our program learned to high-jack and game the reward system, so that was fun.
