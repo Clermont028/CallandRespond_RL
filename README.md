@@ -61,7 +61,7 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
    - First iteration (original call is in the first measure):
    ![image](https://user-images.githubusercontent.com/48339547/117162495-6cf3b300-ad88-11eb-93da-5589931b125f.png)
    - Final iteration:
-  ![image](https://user-images.githubusercontent.com/48339547/117162537-78df7500-ad88-11eb-977b-5e3cd0b45fbc.png)
+    ![image](https://user-images.githubusercontent.com/48339547/117162537-78df7500-ad88-11eb-977b-5e3cd0b45fbc.png)
    
 # Conclusion
 - **A brief summary of your results**
