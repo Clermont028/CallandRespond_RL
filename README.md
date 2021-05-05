@@ -60,7 +60,8 @@ CallandRespond_RL is a music-based learning program that attempts to mimic the c
  - **A few screenshots of your problem/game to describe how your agent works**
  - First iteration (call is shown in the first measure):
  ![image](https://user-images.githubusercontent.com/48339547/117182367-dd57ff80-ad9b-11eb-9489-d3c8d0a28af3.png)
-
+ - 100th iteration:
+ ![image](https://user-images.githubusercontent.com/48339547/117182522-1001f800-ad9c-11eb-8743-30f8da2b6bc3.png)
    
 # Conclusion
 - **A brief summary of your results**
