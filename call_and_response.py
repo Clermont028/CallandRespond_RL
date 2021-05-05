@@ -15,7 +15,7 @@ class callAndResponse():
     def __init__(self, initCall):
 
         self.call = initCall
-        self.EPISODES = 1000
+        self.EPISODES = 50
 
         self.ALL_POSSIBLE_ACTIONS = ['UP', 'DOWN', 'FASTER', 'SLOWER', 'NONE']
         self.ALL_POSSIBLE_NOTES = ["e", "f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'"] 
@@ -178,10 +178,12 @@ class callAndResponse():
                 prevScore = self.calculate_score(prevResponse, duration)
                 difference = abs(currScore - prevScore)
 
-                if currScore >= prevScore:
+                if currScore > prevScore:
                     reward = 1
-                else:
+                elif currScore == prevScore:
                     reward = 0
+                else:
+                    reward = -1
 
                 action_index = self.ALL_POSSIBLE_ACTIONS.index(action)
                 index_prime = self.ALL_POSSIBLE_ACTIONS.index(action_prime)
@@ -208,7 +210,9 @@ class callAndResponse():
 
             # penalizes notes with large intervals between its neighbors
             if after not in self.GOOD_NEIGHBORS[note] or before not in self.GOOD_NEIGHBORS[note]:
-               score -= 2
+                score -= 2
+            else:
+                score += 2
 
             # rewards 8th and 16th notes that come in pairs
             # ex. it would be 'awkward' to have a quarter note jump to a lone 16th note
@@ -219,7 +223,7 @@ class callAndResponse():
             if rhythm == '4' and r_after == '16':
                 score -= 1
             if rhythm == '16' and r_after == '4':
-                score += 1
+                score -= 1
 
 
         return score
